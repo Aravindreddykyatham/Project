@@ -1,0 +1,70 @@
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <div *ngFor="let order of orders">
+        <div class="col-12 d-flex justify-content-between my-3">
+          <h6>OrderId: {{ order.orderId }}</h6>
+          <h6>Status: {{ order.status }}</h6>
+          <h6>Total: {{ order.total }}</h6>
+        </div>
+        <table class="table">
+          <thead>
+            <th>name</th>
+            <th>description</th>
+            <th>image</th>
+            <th>price</th>
+            <th>Quantity</th>
+            <th>status</th>
+            <th *ngIf="seller">change status</th>
+          </thead>
+          <tbody>
+            <tr *ngFor="let orderItem of order.orderItems">
+              <td>{{ orderItem.name }}</td>
+              <td>{{ orderItem.description }}</td>
+              <td><img [appBase64Src]="orderItem.image" /></td>
+              <td>{{ orderItem.price | paiseToRupees }}</td>
+              <td>{{ orderItem.quantity }}</td>
+              <td>{{ orderItem.status }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="col-12">
+      <table class="table">
+        <thead>
+          <th>name</th>
+          <th>image</th>
+          <th>price</th>
+          <th>Quantity</th>
+          <th>status</th>
+          <th *ngIf="seller">change status</th>
+        </thead>
+        <tbody>
+          <tr *ngFor="let orderItem of sellerOrderItems">
+            <td>{{ orderItem.name }}</td>
+            <td><img [appBase64Src]="orderItem.image" /></td>
+            <td>{{ orderItem.price | paiseToRupees }}</td>
+            <td>{{ orderItem.quantity }}</td>
+
+            <td>
+              <mat-form-field>
+                <mat-label>Choose an option</mat-label>
+                <mat-select
+                  (valueChange)="
+                    changeStatus($event, orderItem.id, orderItem.status)
+                  "
+                  [value]="orderItem.status"
+                >
+                  <mat-option [value]="item" *ngFor="let item of statusList">{{
+                    item
+                  }}</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

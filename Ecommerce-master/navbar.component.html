@@ -1,0 +1,51 @@
+<mat-toolbar>
+  <button
+    mat-icon-button
+    class="example-icon"
+    aria-label="Example icon-button with menu icon"
+  >
+    <mat-icon>menu</mat-icon>
+  </button>
+  <span (click)="goToHome()" class="my-app">My App</span>
+  <span class="example-spacer"></span>
+
+  <ng-container *ngIf="user$ | async as user">
+    <button
+      *ngIf="user.userType === userType.SELLER"
+      mat-flat-button
+      class="example-icon favorite-icon"
+      aria-label="Example icon-button with heart icon"
+      (click)="gotoAddProduct()"
+    >
+      Add Product
+    </button>
+  </ng-container>
+  <button mat-icon-button (click)="gotocart()" class="cart-icon">
+    <mat-icon> shopping_cart </mat-icon>
+    <span class="badge badge-warning"> {{ cartItemCount }} </span>
+  </button>
+  <ng-container *ngIf="user$ | async as user">
+    <button
+      *ngIf="user"
+      mat-icon-button
+      [matMenuTriggerFor]="menu"
+      aria-label="Example icon-button with a menu"
+    >
+      <mat-icon>account_circle</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item (click)="goToMyOrders()">
+        <mat-icon>shopping_bag</mat-icon>
+        <span>my orders</span>
+      </button>
+      <button mat-menu-item>
+        <mat-icon>person</mat-icon>
+        <span>{{ user?.firstName }}</span>
+      </button>
+      <button mat-menu-item (click)="logout()">
+        <mat-icon>logout</mat-icon>
+        <span>Logout</span>
+      </button>
+    </mat-menu>
+  </ng-container>
+</mat-toolbar>

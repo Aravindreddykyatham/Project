@@ -1,0 +1,37 @@
+<div class="container">
+  <div class="row" *ngIf="cart$ | async as cart">
+    <div class="col-12 d-flex justify-content-between my-3">
+      <h6>TOTAL PRICE-{{ cart.totalPrice | paiseToRupees }}</h6>
+      <button mat-raised-button (click)="buyNow()">BUY NOW</button>
+    </div>
+    <div class="col-12">
+      <table class="table">
+        <thead>
+          <th>name</th>
+          <th>image</th>
+          <th>price</th>
+          <th>Quantity</th>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of cart.items">
+            <td>{{ item.name }}</td>
+            <td><img [appBase64Src]="item.image" /></td>
+            <td>{{ item.price | paiseToRupees }}</td>
+            <td>
+              <button
+                mat-icon-button
+                [disabled]="item.availableQuantity <= item.quantity"
+                (click)="increaseQuantity(item)"
+              >
+                <mat-icon>add</mat-icon></button
+              >{{ item.quantity
+              }}<button mat-icon-button (click)="decreaseQuantity(item)">
+                <mat-icon>remove</mat-icon>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

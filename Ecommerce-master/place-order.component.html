@@ -1,0 +1,53 @@
+<div class="container" *ngIf="user">
+  <div class="col-12" *ngIf="product">
+    <table class="table">
+      <thead>
+        <th>name</th>
+        <th>image</th>
+        <th>price</th>
+        <th>Quantity</th>
+      </thead>
+      <tbody>
+        <tr>
+          <td>{{ product.name }}</td>
+          <td><img [appBase64Src]="product.image" /></td>
+          <td>{{ product.price | paiseToRupees }}</td>
+          <td>
+            <!-- <button mat-icon-button (click)="increaseQuantity(product)">
+                <mat-icon>add</mat-icon></button
+              >{{ product.quantity
+              }}<button mat-icon-button (click)="decreaseQuantity(product)">
+                <mat-icon>remove</mat-icon>
+              </button> -->
+            {{ product.quantity }}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="col-12" *ngIf="cart">
+    <table class="table">
+      <thead>
+        <th>name</th>
+        <th>image</th>
+        <th>price</th>
+        <th>Quantity</th>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of cart.items">
+          <td>{{ item.name }}</td>
+          <td><img [appBase64Src]="item.image" /></td>
+          <td>{{ item.price | paiseToRupees }}</td>
+          <td>
+            {{ item.quantity }}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="col-12">
+    <button mat-raised-button class="mt-3" (click)="placeOrder()">
+      place order
+    </button>
+  </div>
+</div>

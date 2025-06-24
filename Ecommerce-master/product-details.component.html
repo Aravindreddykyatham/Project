@@ -1,0 +1,39 @@
+<div class="container">
+  <div class="row mt-5">
+    <div class="col-12">
+      <button mat-raised-button class="back-button" (click)="goback()">
+        <mat-icon>arrow_back</mat-icon>home
+      </button>
+    </div>
+  </div>
+  <div class="row mt-5">
+    <div class="col-md-5">
+      <div class="imagediv">
+        <img
+          class="card-img-top"
+          [appBase64Src]="product.image"
+          style="width: 100%"
+        />
+      </div>
+    </div>
+    <div class="col-md-7">
+      <div class="details">
+        <div class="name">
+          <h2>{{ product.name }}</h2>
+        </div>
+        <div>
+          <h5>{{ product.price | paiseToRupees }}</h5>
+        </div>
+        <div class="description">
+          {{ product.description }}
+        </div>
+        <div class="mt-3">
+          <button mat-flat-button class="me-3" (click)="addtoCart()">
+            Add to cart
+          </button>
+          <button mat-flat-button (click)="buyNow()">Buy now</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,101 @@
+<div class="container-fluid">
+  <div class="row">
+    <form [formGroup]="productForm">
+      <div class="row ps-2">
+        <mat-form-field appearance="outline" class="col-md-4 mb-3">
+          <mat-label>Name</mat-label>
+          <input
+            matInput
+            formControlName="productName"
+            placeholder="please enter product name"
+          />
+          <mat-error
+            *ngIf="
+              productForm.controls['productName'].touched &&
+              productForm.get('productName')?.hasError('required')
+            "
+          >
+            Please enter product name
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="col-md-4 mb-3">
+          <mat-label>Description</mat-label>
+          <input
+            matInput
+            formControlName="description"
+            placeholder="please enter product description"
+          />
+          <mat-error
+            *ngIf="
+              productForm.controls['description'].touched &&
+              productForm.get('description')?.hasError('required')
+            "
+          >
+            Please enter product description
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="row ps-2">
+        <mat-form-field appearance="outline" class="col-md-4">
+          <mat-label>Price</mat-label>
+          <input
+            type="number"
+            matInput
+            formControlName="price"
+            placeholder="please enter product price"
+          />
+          <mat-error
+            *ngIf="
+              productForm.controls['price'].touched &&
+              productForm.get('price')?.hasError('required')
+            "
+          >
+            Please enter product price
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="col-md-4">
+          <mat-label>Quantity</mat-label>
+          <input
+            type="number"
+            matInput
+            formControlName="quantity"
+            placeholder="please enter product quantity"
+          />
+          <mat-error
+            *ngIf="
+              productForm.controls['quantity'].touched &&
+              productForm.get('quantity')?.hasError('required')
+            "
+          >
+            Please enter product quantity
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="row ps-2">
+        <div class="col-md-2">
+          <div class="image-wrapper">
+            <label for="image">
+              <span>upload image</span>
+              <img [src]="imageString" />
+            </label>
+            <input
+              id="image"
+              type="file"
+              (change)="onImageChange($event)"
+              placeholder="please enter product name"
+            />
+          </div>
+        </div>
+      </div>
+      <button
+        mat-flat-button
+        class="row ps-2"
+        (click)="onSubmit()"
+        [disabled]="productForm.invalid"
+      >
+        Add Product
+      </button>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,47 @@
+<div class="container-fluid text-center pt-3" text-center pt-3>
+  <div class="row">
+    <form [formGroup]="loginForm">
+      <div class="row">
+        <mat-form-field appearance="outline" class="col-md-2 mx-auto">
+          <mat-label>username</mat-label>
+          <input
+            matInput
+            formControlName="username"
+            placeholder="please enter username name"
+          />
+          <mat-error
+            *ngIf="
+              loginForm.controls['username'].touched &&
+              loginForm.get('username')?.hasError('required')
+            "
+          >
+            Please enter username
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="row">
+        <mat-form-field appearance="outline" class="col-md-2 mx-auto">
+          <mat-label>password</mat-label>
+          <input
+            matInput
+            formControlName="password"
+            placeholder="please enter password"
+          />
+          <mat-error
+            *ngIf="
+              loginForm.controls['password'].touched &&
+              loginForm.get('password')?.hasError('required')
+            "
+          >
+            Please enter password
+          </mat-error>
+        </mat-form-field>
+        <div class="row">
+          <button mat-flat-button class="col-md-2 mx-auto" (click)="onSubmit()">
+            Log in
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
